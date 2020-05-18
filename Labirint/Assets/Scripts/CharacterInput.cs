@@ -31,7 +31,6 @@ public class CharacterInput : MonoBehaviour, IMoveInput
     private void OnMoveInput(InputAction.CallbackContext context)
     {
         var value = context.ReadValue<Vector2>();
-
         MoveDirection = value;
 
         if (movementInput != null)
