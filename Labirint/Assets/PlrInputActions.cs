@@ -25,6 +25,14 @@ public class @PlrInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MouseAim"",
+                    ""type"": ""Value"",
+                    ""id"": ""1bdc6de3-b6dd-4ca4-bd0f-a0e694083cd7"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -137,6 +145,17 @@ public class @PlrInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54bade0b-5923-4f70-8e41-5b77eca03cdf"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseAim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -146,6 +165,7 @@ public class @PlrInputActions : IInputActionCollection, IDisposable
         // Plr
         m_Plr = asset.FindActionMap("Plr", throwIfNotFound: true);
         m_Plr_Movement = m_Plr.FindAction("Movement", throwIfNotFound: true);
+        m_Plr_MouseAim = m_Plr.FindAction("MouseAim", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -196,11 +216,13 @@ public class @PlrInputActions : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Plr;
     private IPlrActions m_PlrActionsCallbackInterface;
     private readonly InputAction m_Plr_Movement;
+    private readonly InputAction m_Plr_MouseAim;
     public struct PlrActions
     {
         private @PlrInputActions m_Wrapper;
         public PlrActions(@PlrInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Plr_Movement;
+        public InputAction @MouseAim => m_Wrapper.m_Plr_MouseAim;
         public InputActionMap Get() { return m_Wrapper.m_Plr; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -213,6 +235,9 @@ public class @PlrInputActions : IInputActionCollection, IDisposable
                 @Movement.started -= m_Wrapper.m_PlrActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_PlrActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_PlrActionsCallbackInterface.OnMovement;
+                @MouseAim.started -= m_Wrapper.m_PlrActionsCallbackInterface.OnMouseAim;
+                @MouseAim.performed -= m_Wrapper.m_PlrActionsCallbackInterface.OnMouseAim;
+                @MouseAim.canceled -= m_Wrapper.m_PlrActionsCallbackInterface.OnMouseAim;
             }
             m_Wrapper.m_PlrActionsCallbackInterface = instance;
             if (instance != null)
@@ -220,6 +245,9 @@ public class @PlrInputActions : IInputActionCollection, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @MouseAim.started += instance.OnMouseAim;
+                @MouseAim.performed += instance.OnMouseAim;
+                @MouseAim.canceled += instance.OnMouseAim;
             }
         }
     }
@@ -227,5 +255,6 @@ public class @PlrInputActions : IInputActionCollection, IDisposable
     public interface IPlrActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnMouseAim(InputAction.CallbackContext context);
     }
 }

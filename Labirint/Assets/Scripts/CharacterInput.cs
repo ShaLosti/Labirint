@@ -6,25 +6,33 @@ public class CharacterInput : MonoBehaviour, IMoveInput
 {
     public Command movementInput;
 
+    private Animator _animator;
+
     private PlrInputActions _inputActions;
 
-    public Vector2 MoveDirection { get; private set; }
+    private Camera _mainCamer;
 
+    public Vector2 MoveDirection { get; private set; }
     private void Awake()
     {
         _inputActions = new PlrInputActions();
+        _animator = GetComponent<Animator>();
+        _mainCamer = Camera.main;
     }
 
     private void OnEnable()
     {
         _inputActions.Enable();
-        if(movementInput)
+        if (movementInput)
             _inputActions.Plr.Movement.performed += OnMoveInput;
+        
+        _inputActions.Plr.MouseAim.performed += OnMouseAim;
     }
 
     private void OnDisable()
     {
         _inputActions.Plr.Movement.performed -= OnMoveInput;
+        _inputActions.Plr.MouseAim.performed -= OnMouseAim;
         _inputActions.Disable();
     }
 
@@ -35,5 +43,16 @@ public class CharacterInput : MonoBehaviour, IMoveInput
 
         if (movementInput != null)
             movementInput.Execute();
+    }
+
+    private void OnMouseAim(InputAction.CallbackContext context)
+    {
+        var value = context.ReadValue<Vector2>();
+        Vector2 rotationDirection = value;
+        rotationDirection = _mainCamer.ScreenToWorldPoint(rotationDirection) - transform.position;
+        print(rotationDirection);
+        _animator.SetFloat("MouseDirectionX", rotationDirection.x);
+        _animator.SetFloat("MouseDirectionY", rotationDirection.y);
+
     }
 }
