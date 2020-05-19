@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class MouseRotationCommand : Command
+public class MouseRotateToAimCommand : Command
 {
     private IRotationInput _rotate;
     private GameObject _objectToRotate;

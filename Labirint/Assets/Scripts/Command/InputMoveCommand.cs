@@ -11,8 +11,8 @@ public class InputMoveCommand : Command
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _move = GetComponent<IMoveInput>();
+        TryGetComponent<Rigidbody2D>(out _rigidbody);
+        TryGetComponent<IMoveInput>(out _move);
         _transform = transform;
     }
 
