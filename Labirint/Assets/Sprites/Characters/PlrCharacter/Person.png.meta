@@ -14,6 +14,18 @@ TextureImporter:
   - first:
       213: 4750811457625829512
     second: Person 1_1
+  - first:
+      213: -2634799857069279492
+    second: Person_0
+  - first:
+      213: 8188619567538790795
+    second: Person_1
+  - first:
+      213: 83177210387533205
+    second: Person_2
+  - first:
+      213: 5616473621025577943
+    second: Person_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -123,70 +135,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Person 1_0
-      rect:
-        serializedVersion: 2
-        x: 82
-        y: 97
-        width: 36
-        height: 60
-      alignment: 9
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d8a43be95b6f9d5d0800000000000000
-      internalID: -3037125213772625267
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Person 1
-      rect:
-        serializedVersion: 2
-        x: 119
-        y: 97
-        width: 39
-        height: 60
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d18de92425b9cd040800000000000000
-      internalID: 4673781290911062045
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Person 1_3
-      rect:
-        serializedVersion: 2
-        x: 43
-        y: 97
-        width: 36
-        height: 60
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 839e16687d3c8bf50800000000000000
-      internalID: 6897478159757863224
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Person 1_1
+      name: Person_0
       rect:
         serializedVersion: 2
         x: 3
@@ -194,14 +143,77 @@ TextureImporter:
         width: 39
         height: 60
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 880b4ae89d54ee140800000000000000
-      internalID: 4750811457625829512
+      spriteID: cf6b2216d7f4f6bd0800000000000000
+      internalID: -2634799857069279492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Person_1
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 97
+        width: 36
+        height: 60
+      alignment: 9
+      pivot: {x: 0.65, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8166fb8c12d3a170800000000000000
+      internalID: 8188619567538790795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Person_2
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 97
+        width: 39
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59d8e8e6b31872100800000000000000
+      internalID: 83177210387533205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Person_3
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 97
+        width: 36
+        height: 60
+      alignment: 9
+      pivot: {x: 0.35, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dbd49f3009b1fd40800000000000000
+      internalID: 5616473621025577943
       vertices: []
       indices: 
       edges: []
