@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using RootNamespace.Command;
 
 public class CharacterLightInput : MonoBehaviour, IRotationInput
 {
