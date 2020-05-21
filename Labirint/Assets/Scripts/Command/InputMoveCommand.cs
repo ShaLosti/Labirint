@@ -1,38 +1,42 @@
 ﻿using System.Collections;
 using UnityEngine;
-public class InputMoveCommand : Command
+
+namespace RootNamespace.Command
 {
-    public AnimationCurve speed;
-
-    private Rigidbody2D _rigidbody;
-    private IMoveInput _move;
-    private Coroutine _moveCoroutine;
-    private Transform _transform;
-
-    private void Awake()
+    public class InputMoveCommand : Command
     {
-        TryGetComponent<Rigidbody2D>(out _rigidbody);
-        TryGetComponent<IMoveInput>(out _move);
-        _transform = transform;
-    }
+        public AnimationCurve speed;
 
-    public override void Execute()
-    {
-        if (_moveCoroutine == null)
-            _moveCoroutine = StartCoroutine(Move());
-    }
+        private Rigidbody2D _rigidbody;
+        private IMoveInput _move;
+        private Coroutine _moveCoroutine;
+        private Transform _transform;
 
-    private IEnumerator Move()
-    {
-        while (_move.MoveDirection != Vector2.zero)
+        private void Awake()
         {
-            var time = (Time.fixedDeltaTime * speed.Evaluate(_move.MoveDirection.magnitude));
-
-            _rigidbody.MovePosition(new Vector2(_transform.position.x, _transform.position.y) + _move.MoveDirection * time);
-
-            yield return null;
+            TryGetComponent<Rigidbody2D>(out _rigidbody);
+            TryGetComponent<IMoveInput>(out _move);
+            _transform = transform;
         }
 
-        _moveCoroutine = null;
+        public override void Execute()
+        {
+            if (_moveCoroutine == null)
+                _moveCoroutine = StartCoroutine(Move());
+        }
+
+        private IEnumerator Move()
+        {
+            while (_move.MoveDirection != Vector2.zero)
+            {
+                var time = (Time.fixedDeltaTime * speed.Evaluate(_move.MoveDirection.magnitude));
+
+                _rigidbody.MovePosition(new Vector2(_transform.position.x, _transform.position.y) + _move.MoveDirection * time);
+
+                yield return null;
+            }
+
+            _moveCoroutine = null;
+        }
     }
 }
