@@ -28,7 +28,6 @@ namespace RootNamespace.AIStartPathFinding
 		{
 			grid = new Node[gridSizeX, gridSizeY];
 			Vector2 worldBottomLeft = new Vector2(transform.position.x, transform.position.y) - Vector2.right * gridWorldSize.x / 2 - Vector2.up * gridWorldSize.y / 2;
-
 			for (int x = 0; x < gridSizeX; x++)
 			{
 				for (int y = 0; y < gridSizeY; y++)
