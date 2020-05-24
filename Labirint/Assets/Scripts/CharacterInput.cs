@@ -56,4 +56,9 @@ public class CharacterInput : MonoBehaviour, IMoveInput
         _animator.SetFloat("MouseDirectionY", rotationDirection.y);
 
     }
+
+    private void OnEscape(InputAction.CallbackContext context)
+    {
+
+    }
 }
