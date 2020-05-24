@@ -33,6 +33,14 @@ public class @PlrInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""713fd129-2410-41fd-a4f0-f68f85243fbc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -156,6 +164,17 @@ public class @PlrInputActions : IInputActionCollection, IDisposable
                     ""action"": ""MouseAim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""50954eed-047f-4c6d-8841-69984215d1c3"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -166,6 +185,7 @@ public class @PlrInputActions : IInputActionCollection, IDisposable
         m_Plr = asset.FindActionMap("Plr", throwIfNotFound: true);
         m_Plr_Movement = m_Plr.FindAction("Movement", throwIfNotFound: true);
         m_Plr_MouseAim = m_Plr.FindAction("MouseAim", throwIfNotFound: true);
+        m_Plr_Menu = m_Plr.FindAction("Menu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -217,12 +237,14 @@ public class @PlrInputActions : IInputActionCollection, IDisposable
     private IPlrActions m_PlrActionsCallbackInterface;
     private readonly InputAction m_Plr_Movement;
     private readonly InputAction m_Plr_MouseAim;
+    private readonly InputAction m_Plr_Menu;
     public struct PlrActions
     {
         private @PlrInputActions m_Wrapper;
         public PlrActions(@PlrInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Plr_Movement;
         public InputAction @MouseAim => m_Wrapper.m_Plr_MouseAim;
+        public InputAction @Menu => m_Wrapper.m_Plr_Menu;
         public InputActionMap Get() { return m_Wrapper.m_Plr; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -238,6 +260,9 @@ public class @PlrInputActions : IInputActionCollection, IDisposable
                 @MouseAim.started -= m_Wrapper.m_PlrActionsCallbackInterface.OnMouseAim;
                 @MouseAim.performed -= m_Wrapper.m_PlrActionsCallbackInterface.OnMouseAim;
                 @MouseAim.canceled -= m_Wrapper.m_PlrActionsCallbackInterface.OnMouseAim;
+                @Menu.started -= m_Wrapper.m_PlrActionsCallbackInterface.OnMenu;
+                @Menu.performed -= m_Wrapper.m_PlrActionsCallbackInterface.OnMenu;
+                @Menu.canceled -= m_Wrapper.m_PlrActionsCallbackInterface.OnMenu;
             }
             m_Wrapper.m_PlrActionsCallbackInterface = instance;
             if (instance != null)
@@ -248,6 +273,9 @@ public class @PlrInputActions : IInputActionCollection, IDisposable
                 @MouseAim.started += instance.OnMouseAim;
                 @MouseAim.performed += instance.OnMouseAim;
                 @MouseAim.canceled += instance.OnMouseAim;
+                @Menu.started += instance.OnMenu;
+                @Menu.performed += instance.OnMenu;
+                @Menu.canceled += instance.OnMenu;
             }
         }
     }
@@ -256,5 +284,6 @@ public class @PlrInputActions : IInputActionCollection, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnMouseAim(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
 }
