@@ -35,7 +35,7 @@ namespace RootNamespace.AIStartPathFinding
 		void CreateGrid()
 		{
 			grid = new Node[gridSizeX, gridSizeY];
-			Vector2 worldBottomLeft = new Vector2(transform.position.x, transform.position.y) - Vector2.right * gridWorldSize.x / 2 - Vector2.up * gridWorldSize.y / 2;
+			Vector2 worldBottomLeft = (Vector2)transform.position - Vector2.right * gridWorldSize.x / 2 - Vector2.up * gridWorldSize.y / 2;
 			for (int x = 0; x < gridSizeX; x++)
 			{
 				for (int y = 0; y < gridSizeY; y++)
@@ -47,13 +47,13 @@ namespace RootNamespace.AIStartPathFinding
 			}
 		}
 
-		public List<Node> GetNeighbourse(Node node)
+		public List<Node> GetNeighbourse(Node node, int depth = 1)
 		{
 			List<Node> neighbourse = new List<Node>();
 
-			for (int x = -1; x <= 1; x++)
+			for (int x = -depth; x <= depth; x++)
 			{
-				for (int y = -1; y <= 1; y++)
+				for (int y = -depth; y <= depth; y++)
 				{
 					if (x == 0 && y == 0) 
 						continue;
@@ -85,7 +85,74 @@ namespace RootNamespace.AIStartPathFinding
 			return grid[x, y];
 		}
 
-		public List<Node> path;
+		public Node ClosestWalkableNode(Node node)
+		{
+			int maxRadius = Mathf.Max(gridSizeX, gridSizeY) / 2;
+			for (int i = 1; i < maxRadius; i++)
+			{
+				Node n = FindWalkableInRadius(node.gridX, node.gridY, i);
+				if (n != null)
+				{
+					return n;
+
+				}
+			}
+			return null;
+		}
+		Node FindWalkableInRadius(int centreX, int centreY, int radius)
+		{
+
+			for (int i = -radius; i <= radius; i++)
+			{
+				int verticalSearchX = i + centreX;
+				int horizontalSearchY = i + centreY;
+
+				// top
+				if (InBounds(verticalSearchX, centreY + radius))
+				{
+					if (grid[verticalSearchX, centreY + radius].walkable)
+					{
+						return grid[verticalSearchX, centreY + radius];
+					}
+				}
+
+				// bottom
+				if (InBounds(verticalSearchX, centreY - radius))
+				{
+					if (grid[verticalSearchX, centreY - radius].walkable)
+					{
+						return grid[verticalSearchX, centreY - radius];
+					}
+				}
+				// right
+				if (InBounds(centreY + radius, horizontalSearchY))
+				{
+					if (grid[centreX + radius, horizontalSearchY].walkable)
+					{
+						return grid[centreX + radius, horizontalSearchY];
+					}
+				}
+
+				// left
+				if (InBounds(centreY - radius, horizontalSearchY))
+				{
+					if (grid[centreX - radius, horizontalSearchY].walkable)
+					{
+						return grid[centreX - radius, horizontalSearchY];
+					}
+				}
+
+			}
+
+			return null;
+
+		}
+
+		bool InBounds(int x, int y)
+		{
+			return x >= 0 && x < gridSizeX && y >= 0 && y < gridSizeY;
+		}
+
 		void OnDrawGizmos()
 		{
 			Gizmos.DrawWireCube(transform.position, new Vector2(gridWorldSize.x, gridWorldSize.y));
