@@ -8,6 +8,12 @@ public class btnFX : MonoBehaviour
     public AudioClip hoverFx;
     public AudioClip clickFx;
 
+    private void Start()
+    {
+        if (myFx == null)
+            TryGetComponent<AudioSource>(out myFx);
+    }
+
     public void HoverSound()
     {
         myFx.PlayOneShot(hoverFx);
