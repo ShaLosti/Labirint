@@ -1,27 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System;
 using Unity.Mathematics;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private Settings currentSettings;
-
+    [SerializeField] private Settings settings;
 
     public static int2 screenSettings;
-    public static float musicVolum = 1f;
+    public static float musicVolume = 1f;
     private void Awake()
     {
-        screenSettings.x = currentSettings.screenWidth;
-        screenSettings.y = currentSettings.screenHeight;
-        musicVolum = currentSettings.commonVolum;
-        print(musicVolum);
-        currentSettings.commonVolum = .5f;
+        screenSettings.x = settings.screenWidth;
+        screenSettings.y = settings.screenHeight;
+        musicVolume = settings.commonVolume;
     }
 
-    public static void ChangeCommonVolumValue()
+    private void Start()
     {
-        musicVolum = .5f;
+        ChangeVolumeValue(musicVolume);
+    }
+
+    public static void ChangeVolumeValue(float volumeValue)
+    {
+        musicVolume = volumeValue;
+        AudioListener.volume = musicVolume;
     }
 }
