@@ -66,6 +66,7 @@ public class CharacterInput : MonoBehaviour, IMoveInput
 
     private void OnEscape(InputAction.CallbackContext context)
     {
-        menuManager.gameObject.SetActive(!menuManager.gameObject.activeSelf);
+        //menuManager.gameObject.SetActive(!menuManager.gameObject.activeSelf);
+        menuManager.ShowPauseMenu(!menuManager.gameObject.activeSelf);
     }
 }

@@ -21984,6 +21984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6b56a06099aea4ca9cac0bd8833633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideAllScreen: {fileID: 2006933314}
   myFx: {fileID: 1009131148}
   hoverFx: {fileID: 8300000, guid: 402ba521da2efca4d8bd06220b5d9c5b, type: 3}
   clickFx: {fileID: 8300000, guid: e991bd72bf73d8d439b6a593838288ec, type: 3}
@@ -21991,7 +21992,6 @@ MonoBehaviour:
   volumeSlider: {fileID: 1446999239}
   startMenuPanel: {fileID: 660696215}
   resolutionDropDown: {fileID: 0}
-  hideAllScreen: {fileID: 2006933314}
 --- !u!1 &1045087979
 GameObject:
   m_ObjectHideFlags: 0
@@ -38016,7 +38016,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d4619530a38874949b2ce9b25344892d, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 

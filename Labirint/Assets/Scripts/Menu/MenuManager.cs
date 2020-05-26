@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
+    [SerializeField] private ScreenControllerUI hideAllScreen;
     [SerializeField] private AudioSource myFx;
     [SerializeField] private AudioClip hoverFx;
     [SerializeField] private AudioClip clickFx;
@@ -14,7 +15,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private GameObject startMenuPanel;
     [SerializeField] private Dropdown resolutionDropDown;
-    [SerializeField] private ScreenControllerUI hideAllScreen;
 
     private GameObject settingsMenuPanel;
 
@@ -32,12 +32,16 @@ public class MenuManager : MonoBehaviour
         {
             Time.timeScale = 0;
             hideAllScreen.ScreenOn();
+            gameObject.SetActive(true);
+            print("Time scale 0");
         }
         else
         {
             Time.timeScale = 1;
+            hideAllScreen.ScreenOff();
+            gameObject.SetActive(false);
+            print("Time scale 1");
         }
-        gameObject.SetActive(state);
     }
 
     public void LoadNextScene()
