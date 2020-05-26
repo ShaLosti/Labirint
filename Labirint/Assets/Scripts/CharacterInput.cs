@@ -2,10 +2,15 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using RootNamespace.Command;
+using UnityEditor;
 
 public class CharacterInput : MonoBehaviour, IMoveInput
 {
+    public Vector2 MoveDirection { get; private set; }
+
     public Command movementInput;
+
+    [SerializeField] MenuManager menuManager;
 
     private Animator _animator;
 
@@ -13,7 +18,6 @@ public class CharacterInput : MonoBehaviour, IMoveInput
 
     private Camera _mainCamer;
 
-    public Vector2 MoveDirection { get; private set; }
     private void Awake()
     {
         _inputActions = new PlrInputActions();
@@ -27,6 +31,8 @@ public class CharacterInput : MonoBehaviour, IMoveInput
 
         _inputActions.Plr.MouseAim.performed += OnMouseAim;
 
+        _inputActions.Plr.Menu.performed += OnEscape;
+
         if (movementInput)
             _inputActions.Plr.Movement.performed += OnMoveInput;
     }
@@ -34,6 +40,7 @@ public class CharacterInput : MonoBehaviour, IMoveInput
     private void OnDisable()
     {
         _inputActions.Plr.Movement.performed -= OnMoveInput;
+        _inputActions.Plr.Menu.performed -= OnEscape;
         _inputActions.Plr.MouseAim.performed -= OnMouseAim;
         _inputActions.Disable();
     }
@@ -59,6 +66,6 @@ public class CharacterInput : MonoBehaviour, IMoveInput
 
     private void OnEscape(InputAction.CallbackContext context)
     {
-
+        menuManager.gameObject.SetActive(!menuManager.gameObject.activeSelf);
     }
 }
