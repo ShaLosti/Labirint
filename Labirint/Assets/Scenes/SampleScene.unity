@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: bd08adef67612a940b6c6e9d5c20cf55,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -21988,7 +21988,7 @@ MonoBehaviour:
   myFx: {fileID: 1009131148}
   hoverFx: {fileID: 8300000, guid: 402ba521da2efca4d8bd06220b5d9c5b, type: 3}
   clickFx: {fileID: 8300000, guid: e991bd72bf73d8d439b6a593838288ec, type: 3}
-  settings: {fileID: 11400000, guid: 46bdef86ca626ff418b0f324c7cf43b6, type: 2}
+  settings: {fileID: 11400000, guid: d540dc37bd674be47a83e8972bc4f320, type: 2}
   volumeSlider: {fileID: 1446999239}
   startMenuPanel: {fileID: 660696215}
   resolutionDropDown: {fileID: 0}
@@ -35690,7 +35690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c632bce9f25cf414694198f1823361d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 46bdef86ca626ff418b0f324c7cf43b6, type: 2}
+  settings: {fileID: 11400000, guid: d540dc37bd674be47a83e8972bc4f320, type: 2}
 --- !u!1 &1677069049
 GameObject:
   m_ObjectHideFlags: 0

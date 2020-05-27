@@ -177,14 +177,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6b56a06099aea4ca9cac0bd8833633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideAllScreen: {fileID: 54047320}
   myFx: {fileID: 51947417}
   hoverFx: {fileID: 8300000, guid: 402ba521da2efca4d8bd06220b5d9c5b, type: 3}
   clickFx: {fileID: 8300000, guid: e991bd72bf73d8d439b6a593838288ec, type: 3}
-  settings: {fileID: 11400000, guid: 46bdef86ca626ff418b0f324c7cf43b6, type: 2}
+  settings: {fileID: 11400000, guid: d540dc37bd674be47a83e8972bc4f320, type: 2}
   volumeSlider: {fileID: 1006263982}
   startMenuPanel: {fileID: 1948179230}
   resolutionDropDown: {fileID: 0}
-  hideAllScreen: {fileID: 54047320}
 --- !u!95 &51947416
 Animator:
   serializedVersion: 3
@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c632bce9f25cf414694198f1823361d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 46bdef86ca626ff418b0f324c7cf43b6, type: 2}
+  settings: {fileID: 11400000, guid: d540dc37bd674be47a83e8972bc4f320, type: 2}
 --- !u!1 &177518542
 GameObject:
   m_ObjectHideFlags: 0
@@ -1264,6 +1264,11 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 51947415}
+    - target: {fileID: 5628771422143916861, guid: 27926e7633ba6f242855663e1348a2d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.6503906
+      objectReference: {fileID: 0}
     - target: {fileID: 5628771422680070051, guid: 27926e7633ba6f242855663e1348a2d3,
         type: 3}
       propertyPath: m_AnchorMax.x

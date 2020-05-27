@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private Settings settings;
-
     public static int2 screenSettings;
     public static float musicVolume = 1f;
     private void Awake()
     {
-        if(screenSettings.x != settings.screenWidth || screenSettings.y != settings.screenHeight)
+        Settings.LoadData();
+        print($"Volume {Settings.commonVolume}");
+        if(screenSettings.x != Settings.width || screenSettings.y != Settings.height)
         {
-            screenSettings.x = settings.screenWidth;
-            screenSettings.y = settings.screenHeight;
+            screenSettings.x = Settings.width;
+            screenSettings.y = Settings.height;
         }
-        if(musicVolume != settings.commonVolume)
-            musicVolume = settings.commonVolume;
+        if(musicVolume != Settings.commonVolume)
+            musicVolume = Settings.commonVolume;
+    }
+
+    private void OnDisable()
+    {
+        Settings.SaveData();
     }
 
     private void Start()
@@ -27,6 +32,7 @@ public class GameManager : MonoBehaviour
     public static void ChangeVolumeValue(float volumeValue)
     {
         musicVolume = volumeValue;
+        Settings.commonVolume = volumeValue;
         AudioListener.volume = musicVolume;
     }
 }

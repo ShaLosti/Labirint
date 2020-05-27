@@ -11,7 +11,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private AudioSource myFx;
     [SerializeField] private AudioClip hoverFx;
     [SerializeField] private AudioClip clickFx;
-    [SerializeField] private Settings settings;
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private GameObject startMenuPanel;
     [SerializeField] private Dropdown resolutionDropDown;
@@ -20,7 +19,7 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        volumeSlider.value = settings.commonVolume;
+        volumeSlider.value = Settings.commonVolume;
         settingsMenuPanel = volumeSlider.gameObject.transform.parent.gameObject;
         if (myFx == null)
             TryGetComponent<AudioSource>(out myFx);
@@ -55,8 +54,7 @@ public class MenuManager : MonoBehaviour
     }
     public void ChangeCommonSoundValue()
     {
-        settings.commonVolume = volumeSlider.value;
-        GameManager.ChangeVolumeValue(settings.commonVolume);
+        GameManager.ChangeVolumeValue(volumeSlider.value);
     }
     public void ChangeCommonResolutionValue()
     {
