@@ -4,19 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static int2 screenSettings;
-    public static float musicVolume = 1f;
     private void Awake()
     {
         Settings.LoadData();
-        print($"Volume {Settings.commonVolume}");
-        if(screenSettings.x != Settings.width || screenSettings.y != Settings.height)
-        {
-            screenSettings.x = Settings.width;
-            screenSettings.y = Settings.height;
-        }
-        if(musicVolume != Settings.commonVolume)
-            musicVolume = Settings.commonVolume;
+        ChangeVolumeValue(Settings.commonVolume);
+        ChangeResolutionValue(Settings.width, Settings.height);
     }
 
     private void OnDisable()
@@ -24,15 +16,16 @@ public class GameManager : MonoBehaviour
         Settings.SaveData();
     }
 
-    private void Start()
-    {
-        ChangeVolumeValue(musicVolume);
-    }
-
     public static void ChangeVolumeValue(float volumeValue)
     {
-        musicVolume = volumeValue;
         Settings.commonVolume = volumeValue;
-        AudioListener.volume = musicVolume;
+        AudioListener.volume = Settings.commonVolume;
+    }
+    public static void ChangeResolutionValue(int width, int height)
+    {
+        Settings.width = width;
+        Settings.height = height;
+        Screen.SetResolution(width, height, FullScreenMode.ExclusiveFullScreen);
+        print("width - " + Settings.width + " height - " + Settings.height);
     }
 }
