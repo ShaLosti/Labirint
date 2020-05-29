@@ -13,9 +13,7 @@ public class CharacterInput : MonoBehaviour, IMoveInput
     [SerializeField] MenuManager menuManager;
 
     private Animator _animator;
-
     private PlrInputActions _inputActions;
-
     private Camera _mainCamer;
 
     private void Awake()
