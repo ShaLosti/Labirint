@@ -1,6 +1,5 @@
-﻿using System.Collections;
+﻿using TMPro;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,16 +12,43 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private AudioClip clickFx;
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private GameObject startMenuPanel;
-    [SerializeField] private Dropdown resolutionDropDown;
+    [SerializeField] private TMP_Dropdown resolutionDropDown;
 
     private GameObject settingsMenuPanel;
+    private Resolution[] resolutions;
 
     private void Start()
     {
+        if(resolutionDropDown != null)
+            SetStartResolution();
+
         volumeSlider.value = Settings.commonVolume;
         settingsMenuPanel = volumeSlider.gameObject.transform.parent.gameObject;
         if (myFx == null)
             TryGetComponent<AudioSource>(out myFx);
+    }
+
+    private void SetStartResolution()
+    {
+        int currentResolutionIndex = 0;
+        resolutionDropDown.options.Clear();
+        resolutions = Screen.resolutions;
+        List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            TMP_Dropdown.OptionData option = new TMP_Dropdown.OptionData();
+            option.text = resolutions[i].width + " x " + resolutions[i].height;
+            resolutionDropDown.options.Add(option);
+
+            if (resolutions[i].width == Settings.width
+                && resolutions[i].height == Settings.height)
+            {
+                currentResolutionIndex = i;
+            }
+        }
+
+        resolutionDropDown.value = currentResolutionIndex;
+        resolutionDropDown.RefreshShownValue();
     }
 
     public void ShowPauseMenu(bool state)
@@ -32,14 +58,12 @@ public class MenuManager : MonoBehaviour
             Time.timeScale = 0;
             hideAllScreen.ScreenOn();
             gameObject.SetActive(true);
-            print("Time scale 0");
         }
         else
         {
             Time.timeScale = 1;
             hideAllScreen.ScreenOff();
             gameObject.SetActive(false);
-            print("Time scale 1");
         }
     }
 
@@ -56,10 +80,10 @@ public class MenuManager : MonoBehaviour
     {
         GameManager.ChangeVolumeValue(volumeSlider.value);
     }
-    public void ChangeCommonResolutionValue()
+    public void ChangeCommonResolutionValue(int resolutionIndex)
     {
-
-        print("Resolution func");
+        Resolution resolution = resolutions[resolutionIndex];
+        GameManager.ChangeResolutionValue(resolution.width, resolution.height);
     }
 
     public void ExitGame()

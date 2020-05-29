@@ -21,4 +21,11 @@ public static class Settings
         PlayerPrefs.SetInt("ScreenWidth", width);
         PlayerPrefs.SetInt("ScreenHeight", height);
     }
+
+    public static void printValues()
+    {
+        Debug.Log(width);
+        Debug.Log(height);
+        Debug.Log(commonVolume);
+    }
 }
