@@ -13,8 +13,6 @@ public static class Settings
         commonVolume = PlayerPrefs.GetFloat("GlobalVolume");
         width = PlayerPrefs.GetInt("ScreenWidth");
         height = PlayerPrefs.GetInt("ScreenHeight");
-        Debug.Log("LoadData");
-        printValues();
     }
 
     public static void SaveData()
@@ -22,8 +20,6 @@ public static class Settings
         PlayerPrefs.SetFloat("GlobalVolume", commonVolume);
         PlayerPrefs.SetInt("ScreenWidth", width);
         PlayerPrefs.SetInt("ScreenHeight", height);
-        Debug.Log("SaveData");
-        printValues();
     }
 
     public static void printValues()

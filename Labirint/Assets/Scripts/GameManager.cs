@@ -26,6 +26,5 @@ public class GameManager : MonoBehaviour
         Settings.width = width;
         Settings.height = height;
         Screen.SetResolution(width, height, FullScreenMode.ExclusiveFullScreen);
-        print("width - " + Settings.width + " height - " + Settings.height);
     }
 }
