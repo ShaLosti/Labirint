@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Settings.LoadData();
-        print($"Volume {Settings.commonVolume}");
         if(screenSettings.x != Settings.width || screenSettings.y != Settings.height)
         {
             screenSettings.x = Settings.width;
