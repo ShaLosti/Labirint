@@ -7,21 +7,18 @@ using UnityEngine.Experimental.Rendering.Universal;
 
 public class Inventory : MonoBehaviour
 {
-    public List<string> objects;
+    private List<string> objects = new List<string>();
 
     [SerializeField] private GameObject flashLight;
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        TryGetComponent<ITakeble>(out ITakeble invent);
-        if (invent != null)
-        {
-            TakeObjectToInvertory(collision.gameObject);
-            invent.OnTake();
-            return;
-        }
+        collision.gameObject.TryGetComponent<ITakeble>(out ITakeble takeble);
+        if (takeble != null)
+            takeble.OnTake(this);
     }
 
-    private void TakeObjectToInvertory(GameObject obj)
+    public void TakeObjectToInvertory(GameObject obj)
     {
         objects.Add(obj.tag);
         UpdatePlrComponents();
@@ -31,7 +28,7 @@ public class Inventory : MonoBehaviour
     {
         if (objects.Contains("FlashLight"))
         {
-            Instantiate(flashLight, gameObject.transform);
+            flashLight.GetComponent<Light2D>().intensity = 1;
         }
     }
 }

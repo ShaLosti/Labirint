@@ -2,5 +2,5 @@
 
 public interface ITakeble
 {
-    void OnTake();
+    void OnTake(Inventory inventory);
 }
