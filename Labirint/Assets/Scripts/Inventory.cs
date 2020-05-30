@@ -12,8 +12,13 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject flashLight;
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<ITakeble>() != null)
+        TryGetComponent<ITakeble>(out ITakeble invent);
+        if (invent != null)
+        {
             TakeObjectToInvertory(collision.gameObject);
+            invent.OnTake();
+            return;
+        }
     }
 
     private void TakeObjectToInvertory(GameObject obj)
