@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
@@ -27,6 +28,14 @@ public class Inventory : MonoBehaviour
     private void UpdatePlrComponents()
     {
         if (objects.Contains("FlashLight"))
+        {
+            flashLight.GetComponent<Light2D>().intensity = 1;
+        }
+        if (objects.Contains("Key"))
+        {
+            GameManager.canOpenTheDoor = true;
+        }
+        if (objects.Contains("Notebook"))
         {
             flashLight.GetComponent<Light2D>().intensity = 1;
         }

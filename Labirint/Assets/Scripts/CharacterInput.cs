@@ -47,7 +47,8 @@ public class CharacterInput : MonoBehaviour, IMoveInput
     {
         var value = context.ReadValue<Vector2>();
         MoveDirection = value;
-
+        _animator.SetFloat("MoveX", MoveDirection.x);
+        _animator.SetFloat("MoveY", MoveDirection.y);
         if (movementInput != null)
             movementInput.Execute();
     }

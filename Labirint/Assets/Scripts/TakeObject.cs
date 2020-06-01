@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class LampController : MonoBehaviour, ITakeble
+public class TakeObject : MonoBehaviour, ITakeble
 {
     public void OnTake(Inventory inventory)
     {
