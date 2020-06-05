@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 public class MenuManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private GameObject startMenuPanel;
     [SerializeField] private TMP_Dropdown resolutionDropDown;
+    [SerializeField] private Toggle fullScreenToggle;
 
     private GameObject settingsMenuPanel;
     private Resolution[] resolutions;
@@ -23,9 +25,12 @@ public class MenuManager : MonoBehaviour
             SetStartResolution();
 
         volumeSlider.value = Settings.commonVolume;
+        Screen.fullScreen = Settings.isFullScreenState != 0;
         settingsMenuPanel = volumeSlider.gameObject.transform.parent.gameObject;
         if (myFx == null)
             TryGetComponent<AudioSource>(out myFx);
+
+        fullScreenToggle.isOn = Settings.isFullScreenState != 0;
     }
 
     private void SetStartResolution()
@@ -91,6 +96,12 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void FullScreenChanger(bool state)
+    {
+        Settings.isFullScreenState = state ? 1 : 0;
+        Screen.fullScreen = state;
+    }
+
     public void HoverSound()
     {
         myFx.PlayOneShot(hoverFx);
@@ -100,4 +111,5 @@ public class MenuManager : MonoBehaviour
     {
         myFx.PlayOneShot(clickFx);
     }
+
 }
