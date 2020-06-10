@@ -91,25 +91,15 @@ public class MenuManager : MonoBehaviour
         GameManager.ChangeResolutionValue(resolution.width, resolution.height);
     }
 
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
 
     public void FullScreenChanger(bool state)
     {
         Settings.isFullScreenState = state ? 1 : 0;
         Screen.fullScreen = state;
     }
+    public void ExitGame() => Application.Quit();
 
-    public void HoverSound()
-    {
-        myFx.PlayOneShot(hoverFx);
-    }
+    public void HoverSound() => myFx.PlayOneShot(hoverFx);
 
-    public void ClickSound()
-    {
-        myFx.PlayOneShot(clickFx);
-    }
-
+    public void ClickSound() => myFx.PlayOneShot(clickFx);
 }

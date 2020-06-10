@@ -12,10 +12,7 @@ public class GameManager : MonoBehaviour
         ChangeResolutionValue(Settings.width, Settings.height);
     }
 
-    private void OnDisable()
-    {
-        Settings.SaveData();
-    }
+    private void OnDisable() => Settings.SaveData();
 
     public static void ChangeVolumeValue(float volumeValue)
     {
