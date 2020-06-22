@@ -1,0 +1,32 @@
+[
+	{
+		"title": "Start",
+		"tags": "",
+		"body": "1 page\n[[ answer: |2 page]]\n[[ answer: |3 page]]\n",
+		"position": {
+			"x": 857,
+			"y": 442
+		},
+		"colorID": 0
+	},
+	{
+		"title": "2 page",
+		"tags": "",
+		"body": "2 page\n[[ answer: |Start]]\n",
+		"position": {
+			"x": 557,
+			"y": 192
+		},
+		"colorID": 0
+	},
+	{
+		"title": "3 page",
+		"tags": "",
+		"body": "3 page\n[[ answer: Вернуться на 1 страницу|Start]]\n",
+		"position": {
+			"x": 1159,
+			"y": 184
+		},
+		"colorID": 0
+	}
+]
