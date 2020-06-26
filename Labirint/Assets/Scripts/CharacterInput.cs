@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using RootNamespace.Command;
 using UnityEditor;
+using System.Collections.Generic;
+using Yarn.Unity.Example;
+using Yarn.Unity;
 
 public class CharacterInput : MonoBehaviour, IMoveInput
 {
@@ -10,7 +13,11 @@ public class CharacterInput : MonoBehaviour, IMoveInput
 
     public Command movementInput;
 
-    [SerializeField] MenuManager menuManager;
+    [SerializeField]
+    private float interactionRadius = 4f;
+
+    [SerializeField]
+    private MenuManager menuManager;
 
     private Animator _animator;
     private PlrInputActions _inputActions;
@@ -67,5 +74,20 @@ public class CharacterInput : MonoBehaviour, IMoveInput
     {
         //menuManager.gameObject.SetActive(!menuManager.gameObject.activeSelf);
         menuManager.ShowPauseMenu(!menuManager.gameObject.activeSelf);
+    }
+
+    public void CheckForNearbyNPC()
+    {
+        var allParticipants = new List<NPC>(FindObjectsOfType<NPC>());
+        var target = allParticipants.Find(delegate (NPC p) {
+            return string.IsNullOrEmpty(p.talkToNode) == false && // has a conversation node?
+            (p.transform.position - this.transform.position)// is in range?
+            .magnitude <= interactionRadius;
+        });
+        if (target != null)
+        {
+            // Kick off the dialogue at this node.
+            FindObjectOfType<DialogueRunner>().StartDialogue(target.talkToNode);
+        }
     }
 }

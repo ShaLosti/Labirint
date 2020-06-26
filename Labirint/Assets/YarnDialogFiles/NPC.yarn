@@ -1,0 +1,14 @@
+title: NPC
+tags: 
+colorID: 0
+position: -540,-293
+---
+[[ answer: goto page 1|NPC.page1]]
+===
+title: NPC.page1
+tags: 
+colorID: 0
+position: -420,-513
+---
+page 1
+===
