@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScreenControllerUI : MonoBehaviour
-{ 
-    public void ScreenOff()
+namespace RootNamespace.Menu
+{
+    public class ScreenControllerUI : MonoBehaviour
     {
-        gameObject.SetActive(false);
-    }
+        public void ScreenOff()
+        {
+            gameObject.SetActive(false);
+        }
 
-    public void ScreenOn()
-    {
-        gameObject.SetActive(true);
+        public void ScreenOn()
+        {
+            gameObject.SetActive(true);
+        }
     }
 }

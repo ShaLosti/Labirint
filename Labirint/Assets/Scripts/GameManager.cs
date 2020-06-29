@@ -1,6 +1,5 @@
-﻿using System;
-using Unity.Mathematics;
-using UnityEngine;
+﻿using UnityEngine;
+using RootNamespace.Menu;
 
 public class GameManager : MonoBehaviour
 {

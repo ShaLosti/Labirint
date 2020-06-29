@@ -1,14 +1,23 @@
-﻿using System;
+﻿using RootNamespace.Command;
+using RootNamespace.Menu;
+using RootNamespace.Yarn;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using RootNamespace.Command;
-using UnityEditor;
-using System.Collections.Generic;
-using Yarn.Unity.Example;
 using Yarn.Unity;
 
 public class CharacterInput : MonoBehaviour, IMoveInput
 {
+    private static CharacterInput controllByPlr;
+    public static CharacterInput ControllByPlr
+    {
+        get => controllByPlr;
+        set
+        {
+            if (value != null)
+                controllByPlr = value;
+        }
+    }
     public Vector2 MoveDirection { get; private set; }
 
     public Command movementInput;
@@ -25,7 +34,12 @@ public class CharacterInput : MonoBehaviour, IMoveInput
 
     private void Awake()
     {
+        controllByPlr = this;
         _inputActions = new PlrInputActions();
+    }
+
+    private void Start()
+    {
         TryGetComponent<Animator>(out _animator);
         _mainCamer = Camera.main;
     }
@@ -79,7 +93,8 @@ public class CharacterInput : MonoBehaviour, IMoveInput
     public void CheckForNearbyNPC()
     {
         var allParticipants = new List<NPC>(FindObjectsOfType<NPC>());
-        var target = allParticipants.Find(delegate (NPC p) {
+        var target = allParticipants.Find(delegate (NPC p)
+        {
             return string.IsNullOrEmpty(p.talkToNode) == false && // has a conversation node?
             (p.transform.position - this.transform.position)// is in range?
             .magnitude <= interactionRadius;
