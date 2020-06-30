@@ -22,11 +22,15 @@ namespace RootNamespace.Command
 
         private void Rotate()
         {
-            Vector2 mousePostion = Camera.main.ScreenToWorldPoint(_rotate.RotationDirection);
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(_rotate.RotationDirection);
+
+            Vector2 newPos = transform.parent.GetComponent<CircleCollider2D>().ClosestPoint(mousePosition);
+
+            transform.position = new Vector3(newPos.x, newPos.y, transform.position.z);
 
             Vector2 direction = new Vector2(
-                mousePostion.x - transform.position.x,
-                mousePostion.y - transform.position.y
+                mousePosition.x - transform.parent.position.x,
+                mousePosition.y - transform.parent.position.y
                 );
             transform.up = direction;
         }

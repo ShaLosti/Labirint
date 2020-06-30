@@ -48,3 +48,6 @@ TagManager:
   - name: MonsterLight
     uniqueID: 136451895
     locked: 0
+  - name: Walls
+    uniqueID: 2138967665
+    locked: 0

@@ -33,6 +33,7 @@ public class CharacterLightInput : MonoBehaviour, IRotationInput
     {
         var value = context.ReadValue<Vector2>();
         RotationDirection = value;
+
         if (mouseRotate != null)
             mouseRotate.Execute();
     }

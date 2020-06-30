@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Cinemachine.Utility;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class Enemy : MonoBehaviour
 {
-    private enum EnemyStates
+    public enum EnemyStates
     {
         searchPlr,
         followPlr,
@@ -20,13 +22,20 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public Vector3 targetWayPoint;
     public Transform plrTransform;
-    public Transform targetWayPoint;
-    private Transform _nearWayPoint;
 
+    [SerializeField]
+    private float maxTime;
+    [SerializeField]
+    private short radiusAroundPlr;
+    [SerializeField]
+    private float speed;
+
+    private float t;
     private NavMeshAgent agent;
     private EnemyStates state;
-    private EnemyStates State { get => state; set => state = value; }
+    public EnemyStates State { get => state; set => state = value; }
 
     private void Start()
     {
@@ -36,7 +45,9 @@ public class Enemy : MonoBehaviour
         agent.updateUpAxis = false;
 
         CurrentEnemy = this;
-        State = EnemyStates.followPlr;
+
+        agent.speed = speed;
+        State = EnemyStates.stop;
     }
 
     private void Update()
@@ -44,27 +55,34 @@ public class Enemy : MonoBehaviour
         switch (State)
         {
             case EnemyStates.searchPlr:
-                targetWayPoint = FindNearestTargetWayPoint();
+                targetWayPoint = FindNearestTargetWayPoint(targetWayPoint);
                 break;
             case EnemyStates.followPlr:
-                targetWayPoint = plrTransform;
+                targetWayPoint = plrTransform.position;
                 break;
             case EnemyStates.stop:
-                targetWayPoint = transform;
+                targetWayPoint = transform.position;
                 break;
         }
-        agent.SetDestination(targetWayPoint.position);
+        agent.SetDestination(targetWayPoint);
     }
 
-    private Transform FindNearestTargetWayPoint()
+    private Vector3 FindNearestTargetWayPoint(Vector3 _targetWayPoint)
     {
-        if(targetWayPoint == plrTransform
-            || targetWayPoint == transform
-            || Vector3.Distance(transform.position, _nearWayPoint.position) < 1f)
+        t += Time.deltaTime;
+        if(t >= maxTime || (_targetWayPoint == Vector3.zero
+            || Vector3.Distance(_targetWayPoint, plrTransform.position) < 1f
+            || Vector3.Distance(transform.position, _targetWayPoint) < 1f))
         {
+            Vector2 newTargetWayPoint =  new Vector2(CharacterInput.ControllByPlr.transform.position.x,
+            CharacterInput.ControllByPlr.transform.position.y)
+            + UnityEngine.Random.insideUnitCircle * radiusAroundPlr;
 
+            _targetWayPoint = new Vector3(newTargetWayPoint.x, newTargetWayPoint.y, _targetWayPoint.z);
+
+            t = 0f;
         }
-        return _nearWayPoint;
+        return _targetWayPoint;
     }
     private void Initilize()
     {
@@ -72,4 +90,9 @@ public class Enemy : MonoBehaviour
             plrTransform = CharacterInput.ControllByPlr.transform;
     }
 
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, targetWayPoint);
+    }
 }
